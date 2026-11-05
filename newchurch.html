@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal - Far Far Baptist Church</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-lg bg-white rounded-xl shadow-lg p-6 md:p-8 border border-slate-200 my-6">
+        
+        <!-- Header & Branding -->
+        <div class="text-center mb-6">
+            <img src=""C:\Users\sbija\OneDrive\Desktop\Project"" alt="Church Logo" 
+                 class="w-20 h-20 mx-auto mb-3 object-contain rounded-full border shadow-sm" 
+                 onerror="this.src='https://via.placeholder.com/80?text=Logo'" />
+            <h1 class="text-2xl font-bold text-indigo-950">Far Far Baptist Church</h1>
+            <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Ghana Baptist Convention</p>
+        </div>
+
+        <!-- Portal Navigation Tabs -->
+        <div class="flex border-b border-slate-200 mb-6">
+            <button id="tabSignIn" onclick="switchTab('signin')" 
+                    class="flex-1 py-2 text-center font-medium text-sm border-b-2 border-indigo-900 text-indigo-950 focus:outline-none transition">
+                Department Sign In
+            </button>
+            <button id="tabRegister" onclick="switchTab('register')" 
+                    class="flex-1 py-2 text-center font-medium text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-700 focus:outline-none transition">
+                Register New Member
+            </button>
+        </div>
+
+        <!-- ==================== FORM 1: DEPARTMENT SIGN IN ==================== -->
+        <form id="signInForm" onsubmit="handleSignIn(event)" class="space-y-4 fade-in">
+            <div>
+                <label for="deptSelect" class="block text-sm font-medium text-slate-700 mb-1">Select Department / Ministry</label>
+                <select id="deptSelect" name="department" required 
+                        class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                    <option value="" disabled selected>-- Select Department --</option>
+                    <option value="administration">Church Administration / Executives (Head Pastor[Rev.Jeffery Laar])</option>
+                    <option value="media it">Media & IT Ministry (Music Head [Bro Jullian Kombat])</option>
+                    <option value="music_choir">Music & Choir Ministry (Choir Leader [Sis. Sarah])</option>
+                    <option value="ushering">Ushering & Protocol(Protocol Officer [Bro Jonathan])</option>
+                    <option value="youth">Youth Ministry (Youth President [Bro Benjemin Dindebil])</option>
+                    <option value="children">Children's Ministry (Sunday School Teacher [Bro Emmanuel Miila])</option>
+                    <option value="evangelism">Evangelism & Outreach (Evangelism Ministry [Sis.Charity])</option>
+                    <option value="women">Women's Fellowship (women Leadership[Mrs Lydia Janam])</option>
+                    <option value="men">Men's Fellowship (Men Leadership [Mr.Janam</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="userRole" class="block text-sm font-medium text-slate-700 mb-1">Access Level</label>
+                <select id="userRole" name="role" required 
+                        class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                    <option value="department_head">Department Head / Leader (Head Pastor[Rev.Jeffery Laar])</option>
+                    <option value="data_clerk">Data Officer / Secretary(church Secretary[Mr.Alex Kombat])</option>
+                    <option value="volunteer">Department Volunteer / Member(church member[volunteer])</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="loginIdentity" class="block text-sm font-medium text-slate-700 mb-1">Email or Phone Number</label>
+                <input type="text" id="loginIdentity" placeholder="e.g. 024XXXXXXX or user@church.org" required 
+                       class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center mb-1">
+                    <label for="loginPassword" class="block text-sm font-medium text-slate-700">Password</label>
+                    <a href="#" class="text-xs text-indigo-800 hover:underline">Forgot?</a>
+                </div>
+                <input type="password" id="loginPassword" placeholder="••••••••" required 
+                       class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent" />
+            </div>
+
+            <button type="submit" class="w-full py-2.5 px-4 bg-indigo-900 hover:bg-indigo-950 text-white font-medium text-sm rounded-lg shadow-sm transition">
+                Sign In to Department
+            </button>
+        </form>
+
+        <!-- ==================== FORM 2: NEW MEMBER REGISTRATION ==================== -->
+        <form id="registerForm" onsubmit="handleRegistration(event)" class="space-y-4 hidden fade-in">
+            <p class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded border border-slate-200 mb-4">
+                Fill in the details below to register a new member into the church system and assign them to a department.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label for="firstName" class="block text-xs font-medium text-slate-700 mb-1">First Name</label>
+                    <input type="text" id="firstName" placeholder="Laar" required 
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+                </div>
+                <div>
+                    <label for="lastName" class="block text-xs font-medium text-slate-700 mb-1">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Dunwaak" required 
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label for="regPhone" class="block text-xs font-medium text-slate-700 mb-1">Phone Number</label>
+                    <input type="tel" id="regPhone" placeholder="0240000000" required 
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+                </div>
+                <div>
+                    <label for="regEmail" class="block text-xs font-medium text-slate-700 mb-1">Email (Optional)</label>
+                    <input type="email" id="regEmail" placeholder="member@gmail.com" 
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label for="gender" class="block text-xs font-medium text-slate-700 mb-1">Gender</label>
+                    <select id="gender" required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                        <option value="" disabled selected>Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="residence" class="block text-xs font-medium text-slate-700 mb-1">Residential Area</label>
+                    <input type="text" id="residence" placeholder="e.g. Wakuan / Bagnakuan" required 
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+                </div>
+            </div>
+
+            <div>
+                <label for="assignDept" class="block text-xs font-medium text-slate-700 mb-1">Assign to Department / Auxiliary</label>
+                <select id="assignDept" required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                    <option value="" disabled selected>-- Select Department --</option>
+                    <option value="media_it">Media & IT Ministry</option>
+                    <option value="music_choir">Music & Choir Ministry</option>
+                    <option value="ushering">Ushering & Protocol</option>
+                    <option value="youth">Youth Ministry</option>
+                    <option value="children">Children's Ministry</option>
+                    <option value="evangelism">Evangelism & Outreach</option>
+                    <option value="women">Women's Fellowship</option>
+                    <option value="men">Men's Fellowship</option>
+                    <option value="general">General Member (Unassigned)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-sm rounded-lg shadow-sm transition">
+                Register Member
+            </button>
+        </form>
+
+        <!-- ==================== DEPARTMENT HEAD & WEBMASTER CONTACT BLOCK ==================== -->
+        <div class="mt-8 pt-6 border-t border-slate-200">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-3">Portal Contact & Technical Support</h3>
+            
+            <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 space-y-4 text-xs">
+                
+                <!-- Department Head Contact Inputs -->
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Department Head / Desk Contact</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="tel" id="deptHeadPhone" placeholder="Dept Head Phone" 
+                               class="px-2.5 py-1.5 bg-white border border-slate-300 rounded text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600" />
+                        <input type="email" id="deptHeadEmail" placeholder="Dept Head Email" 
+                               class="px-2.5 py-1.5 bg-white border border-slate-300 rounded text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-600" />
+                    </div>
+                </div>
+
+                <!-- Webmaster / Developer Direct Contact (Permanently Set) -->
+                <div class="pt-2 border-t border-slate-200">
+                    <p class="font-semibold text-slate-700 mb-1">Website & Systems Administrator</p>
+                    <div class="flex flex-col sm:flex-row justify-between text-slate-600 gap-1 bg-white p-2 rounded border border-slate-200">
+                        <span><strong>Name:</strong> Kalifa Solomon Bijagkin</span>
+                        <span><strong>Phone:</strong> 0549162237</span>
+                        <span><strong>Email:</strong> sbijagkin@gmail.com</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function switchTab(tab) {
+            const signInForm = document.getElementById('signInForm');
+            const registerForm = document.getElementById('registerForm');
+            const tabSignIn = document.getElementById('tabSignIn');
+            const tabRegister = document.getElementById('tabRegister');
+
+            if (tab === 'signin') {
+                signInForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                
+                tabSignIn.className = "flex-1 py-2 text-center font-medium text-sm border-b-2 border-indigo-900 text-indigo-950 focus:outline-none transition";
+                tabRegister.className = "flex-1 py-2 text-center font-medium text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-700 focus:outline-none transition";
+            } else {
+                signInForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+
+                tabRegister.className = "flex-1 py-2 text-center font-medium text-sm border-b-2 border-emerald-700 text-emerald-800 focus:outline-none transition";
+                tabSignIn.className = "flex-1 py-2 text-center font-medium text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-700 focus:outline-none transition";
+            }
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            const dept = document.getElementById('deptSelect').value;
+            const role = document.getElementById('userRole').value;
+            const identity = document.getElementById('loginIdentity').value;
+
+            alert(`Signing in to ${dept.toUpperCase()} department as ${role} (${identity})`);
+        }
+
+        function handleRegistration(event) {
+            event.preventDefault();
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('regPhone').value;
+            const dept = document.getElementById('assignDept').value;
+
+            const memberData = {
+                name: `${firstName} `${lastName},
+                phone: phone,
+                email: document.getElementById('regEmail').value,
+                gender: document.getElementById('gender').value,
+                residence: document.getElementById('residence').value,
+                department: dept,
+                registeredAt: new Date().toISOString()
+            };
+
+            console.log('New Member Registered:', memberData);
+            alert(`Successfully registered ${memberData.name} into ${dept.toUpperCase()}!`);
+            
+            document.getElementById('registerForm').reset();
+        }
+    </script>
+
+</body>
+</html>
